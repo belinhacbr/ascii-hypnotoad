@@ -1,1 +1,1 @@
-web: python3 alltheglory.py
+web: sh startup.sh
