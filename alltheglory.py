@@ -4,7 +4,8 @@ import time
 from flask import Flask, Response, request
 app = Flask('ascii-hypnotoad')
 
-frames = ['\x1b[?25l']
+frames = ['\x1b[2J']  # clear screen
+
 
 def load_frames():
     path = './frames/*.ansi'
