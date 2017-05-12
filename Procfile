@@ -1,1 +1,1 @@
-web: python alltheglory.py
+web: gunicorn alltheglory:app
