@@ -36,5 +36,7 @@ def all_the_glory():
     return Response(to_hypnotoad()) if is_plain_text else 'All the glory to the Hypnotoad!!!'
 
 load_frames()
-app.debug = True
-app.run()
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
