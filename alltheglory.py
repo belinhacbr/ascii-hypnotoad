@@ -2,7 +2,17 @@ import glob
 import time
 
 from flask import Flask, Response, request
-app = Flask(__name__)
+app = Flask('ascii-hypnotoad')
+
+frames = ['\x1b[?25l']
+
+def load_frames():
+    path = './frames/*.ansi'
+    files = glob.glob(path)
+    for f in files:
+        with open(f, 'r') as frame:
+            frames.append('\x1b[42A' + frame.read())
+        frame.close()
 
 
 def to_hypnotoad():
@@ -25,12 +35,6 @@ def all_the_glory():
     is_plain_text = any(agent in user_agent for agent in plain_text_agents)
     return Response(to_hypnotoad()) if is_plain_text else 'All the glory to the Hypnotoad!!!'
 
-if __name__ == '__main__':
-    path = './frames/*.ansi'
-    files = glob.glob(path)
-    frames = ['\x1b[?25l']
-    for f in files:
-        with open(f, 'r') as frame:
-            frames.append('\x1b[42A' + frame.read())
-        frame.close()
-    app.run()
+load_frames()
+app.debug = True
+app.run()
